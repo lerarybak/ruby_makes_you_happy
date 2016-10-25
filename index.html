@@ -40,11 +40,46 @@
         <section id="activemodel">
           ActiveModel
         </section>
+        <section id="validations">
+          <pre>
+            <code data-trim data-noescape class="ruby">
+class Pet < ActiveRecord::Base
+  NAME_MAX_LENGTH = 50
+
+  validates :name, :birthday, :gender, presence: true
+  validates :name, length: { maximum: NAME_MAX_LENGTH }
+
+  validates :weight, numericality: { greater_than: 0 }
+  validates_date :birthday, on_or_before: :today
+end
+            </code>
+          </pre>
+        </section>
         <section id="actionview">
-          ActionView
+          <p>ActionView</p>
         </section>
         <section id="actioncontroller">
-          ActionController
+          <p>ActionController</p>
+          <ul>
+            <li>RESTful</li>
+            <li>Filters</li>
+          </ul>
+        </section>
+        <section id="response-formats">
+          <pre>
+            <code data-trim data-noescape class="ruby">
+class UsersController < ApplicationController
+  def index
+    @users = User.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render xml: @users}
+      format.json { render json: @users}
+    end
+  end
+end
+            </code>
+          </pre>
         </section>
         <section id="activerecord">
           ActiveRecord
