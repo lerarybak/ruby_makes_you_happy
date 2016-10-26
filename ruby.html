@@ -1,0 +1,478 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Ruby makes you happy</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <style type="text/css">
+      .left { text-align: left; }
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+
+        <section id="title">
+          <h1>Ruby делает тебя счастливее</h1>
+          </br></br></br></br>
+          <p class="left">Скачко Александр, Software developer, Intransition<p>
+          <p class="left">Рыбак Валерия, Software developer, Intransition<p>
+        </section>
+
+
+        <section id="ruby">
+          <h1>Ruby</h1>
+          <ul>
+            <li>динамический</li>
+            <li>строготипизированный</li>
+            <li>мультипарадигменный</li>
+            <li>кроссплатформенный</li>
+          </ul>
+        </section>
+
+
+        <section class="stack" id="semantics">
+          <section id="semantics-title">
+            <h1>Семантика</h1>
+          </section>
+          <section id="semantics-1">
+            <pre>
+              <code data-trim data-escape class="ruby">
+1 + 1 #=> 2
+1.class #=> Fixnum
+
+
+3.times do
+  puts 'Hello!'
+end
+
+
+puts 1.+(1) #=> 2
+puts 3.div(2) #=> 2
+              </code>
+            </pre>
+          </section>
+        </section>
+
+
+        <section class='stack' id="open-classes">
+          <section id="open-classes-title">
+            <h1>Открытые классы</h1>
+            <h2>(open classes)</h2>
+          </section>
+          <section id="open-classes-1">
+            <pre>
+              <code data-trim data-escape class="ruby">
+class Fixnum
+  def +(value)
+    self - value
+  end
+end
+
+puts 10 + 1 #=> 9
+            </code>
+          </pre>
+        </section>
+        <section id="open-classes-2">
+          <pre>
+            <code data-trim data-escape class="ruby">
+class Student
+  def initialize(name)
+    @name = name
+  end
+end
+
+student_1 = Student.new('John')
+student_2 = Student.new('Alex')
+              </code>
+            </pre>
+          </section>
+          <section id="open-classes-3">
+            <pre>
+              <code data-trim data-escape class="ruby">
+student_2.group
+  #=> NoMethodError: undefined method 'group' for
+      #Student @name="Alex"
+
+def student_2.group
+  '0001'
+end
+
+student_2.group #=> '0001'
+              </code>
+            </pre>
+          </section>
+          <section id="open-classes-4">
+            <pre>
+              <code data-trim data-escape class="ruby">
+Student.class_eval do
+  def university
+    'BSUIR'
+  end
+end
+
+student_1.university #=> 'BSUIR'
+student_2.university #=> 'BSUIR'
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section class="stack" id="mixins">
+          <section id="mixins-title">
+            <h1>Миксины</h1>
+            <h2>(mixins)</h2>
+          </section>
+          <section id="mixins-1">
+            <pre>
+              <code data-trim data-escape class="ruby">
+class SportCar
+end
+
+car = SportCar.new
+car.speed #=> NoMethodError: undefined method 'speed' for SportCar
+              </code>
+            </pre>
+          </section>
+          <section id="mixins-2">
+            <pre>
+              <code data-trim data-escape class="ruby">
+module SportEngine
+  def speed
+    320
+  end
+end
+
+class SportCar
+  include SportEngine
+end
+
+car.speed #=> 320
+              </code>
+            </pre>
+          </section>
+          <section id="mixins-3">
+            <pre>
+              <code data-trim data-escape class="ruby">
+module Engine
+  def speed
+    140
+  end
+end
+
+class Car
+  extend Engine
+end
+
+Car.speed #=> 140
+car.speed #=> 320
+              </code>
+            </pre>
+          </section>
+        </section>
+
+
+        <section class="stack" id="introspection">
+          <section id="introspection-title">
+            <h1>Интроспекция</h1>
+            <h2>(type introspection)</h2>
+          </section>
+          <section id="introspection-1">
+            <p>
+              <b>Интроспекция</b> - возможность определить тип и структуру объекта во время исполнения.
+            </p>
+          </section>
+          <section id="introspection-2">
+            <pre>
+              <code data-trim data-escape class="ruby">
+module A
+  def test
+  end
+end
+
+A.instance_methods #=> [:test]
+              </code>
+            </pre>
+          </section>
+          <section id="introspection-3">
+            <pre>
+              <code data-trim data-escape class="ruby">
+module C
+end
+
+module A
+  class B
+    include C
+  end
+end
+
+A::B.ancestors #=> [A::B, C, Object, Kernel, BasicObject]
+A::B.included_modules #=> [C, Kernel]
+              </code>
+            </pre>
+          </section>
+          <section id="introspection-4">
+            <pre>
+              <code data-trim data-escape class="ruby">
+class B
+  def public_method
+  end
+
+  protected
+
+  def protected_method
+  end
+
+  private
+
+  def private_method
+  end
+end
+              </code>
+            </pre>
+          </section>
+          <section id="introspection-5">
+            <pre>
+              <code data-trim data-escape class="ruby">
+B.instance_methods
+  #=> [:public_method, :protected_method, :private_method, ...]
+B.public_instance_methods #=> [:public_method, ...]
+B.protected_instance_methods #=> [:protected_method]
+B.private_instance_methods #=> [:private_method, ...]
+              </code>
+            </pre>
+          </section>
+          <section id="introspection-6">
+            <pre>
+              <code data-trim data-escape class="ruby">
+object = B.new
+object.class #=> B
+object.instance_of?(B) #=> true
+              </code>
+            </pre>
+          </section>
+          <section id="introspection-7">
+            <pre>
+              <code data-trim data-escape class="ruby">
+object.methods
+  #=> [:public_method, :protected_method, :private_method, ...]
+object.public_methods #=> [:public_method, ...]
+object.protected_methods #=> [:protected_method]
+object.private_methods #=> [:private_method, ...]
+              </code>
+            </pre>
+          </section>
+          <section id="introspection-8">
+            <pre>
+              <code data-trim data-escape class="ruby">
+class X
+end
+
+class Z < X
+end
+
+Z.superclass #=> X
+              </code>
+            </pre>
+          </section>
+        </section>
+
+
+        <section class="stack" id="reflection">
+          <section id="reflection-title">
+            <h1>Рефлексия</h1>
+            <h2>(reflection)</h2>
+          </section>
+          <section id="reflection-1">
+            <p>
+              <b>Рефлексия</b> - процесс, во время которого программа может отслеживать и модифицировать собственную структуру и поведение во время исполнения.
+            </p>
+          </section>
+          <section id="reflection-2">
+            <pre>
+              <code data-trim data-escape class="ruby">
+class A
+  def test
+    puts 'test'
+  end
+end
+
+A.new.test #=> 'test'
+Object.const_get(:A).send(:new).send(:test) #=> 'test'
+              </code>
+            </pre>
+          </section>
+        </section>
+
+
+        <section class="stack" id="metaprogramming">
+          <section id="metaprogramming-title">
+            <h2>Метапрограммирование</h2>
+          </section>
+          <section id="metaprogramming-1">
+            <p>
+              <b>Meтапрограммирование</b> - программы, которые изменяют себя во время исполнения или пораждают другие программы как результат своей работы.
+            </p>
+          </section>
+          <section id="metaprogramming-2">
+            <pre>
+              <code data-trim data-escape class="ruby">
+class Payment
+  STATUSES = ['pending', 'processed', 'cancelled']
+
+  attr_reader :status
+
+  def initialize(status)
+    @status = status
+  end
+
+  STATUSES.each do |payment_status|
+    define_method "#{payment_status}?" do
+      payment_status == status
+    end
+  end
+end
+              </code>
+            </pre>
+          </section>
+          <section id="metaprogramming-3">
+            <pre>
+              <code data-trim data-escape class="ruby">
+payment = Payment.new('pending')
+payment.processed? #=> false
+payment.pending? #=> true
+              </code>
+            </pre>
+          </section>
+        </section>
+
+
+        <section class="stack" id="fp">
+          <section id="fp-title">
+            <h2>Функциональное программирование</h2>
+          </section>
+          <section id="fp-1">
+            <ul>
+              <li>Функции высших порядков (higher-order functions)</li>
+              <li>Замыкания (closures)</li>
+              <li>Каррирование (carrying)</li>
+              <li>Ленивые вычисления (lazy-evaluation)</li>
+              <li>Неизменяемые объекты</li>
+            </ul>
+          </section>
+          <section id="fp-2">
+            <pre>
+              <code data-trim data-escape class="ruby">
+increment = ->(x) { x + 1 }
+increment.call(1) #=> 2
+[1, 2, 3].map(&increment) #=> [2, 3, 4]
+              </code>
+            </pre>
+          </section>
+        </section>
+
+
+        <section id="speed">
+          <h2>Производительность</h2>
+        </section>
+
+
+        <section id="speed">
+          <h2>Многопоточность,</h2>
+          <h3>параллельное исполнение</h3>
+        </section>
+
+
+        <section id="implementation">
+          <h1>Реализации</h1>
+          <ul>
+            <li>MRI</li>
+            <li>JRuby</li>
+            <li>mruby</li>
+            <li>rubinius</li>
+          </ul>
+        </section>
+
+
+        <section class="stack" id="crossplatform">
+          <section id="crossplatform-title">
+            <h2>Кроссплатформенность</h2>
+          </section>
+          <section id="crossplatform-1">
+            <ul>
+              <li>Linux</li>
+              <li>Windows</li>
+              <li>macOS</li>
+              <li>BSD</li>
+              <li>Solaris</li>
+              <li>Windows Phone</li>
+              <li>Symbian OS</li>
+              <li>BeOS</li>
+              <li>IBM i</li>
+              <li>AIX</li>
+            </ul>
+          </section>
+          <section id="crossplatform-2">
+            <h2>Разработка мобильных приложений</h2>
+            <ul>
+              <li>rubymotion</li>
+              <li>ruboto</li>
+              <li>mobiruby</li>
+            </ul>
+          </section>
+        </section>
+
+
+        <section id="stdlib">
+          <h1>Stdlib, gems</h1>
+        </section>
+
+
+        <section id="feature">
+          <h1>Будущее</h1>
+          <ul>
+            <li>Soft typing</li>
+            <li>Guild</li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
+</html>
