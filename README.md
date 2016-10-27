@@ -1,1 +1,1 @@
-You may get instructions here: https://github.com/hakimel/reveal.js
+Слайды к докладу «Ruby делает тебя счастливее» конференции BSUIR TECHWEEK 2016
