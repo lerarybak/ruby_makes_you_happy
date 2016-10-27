@@ -316,7 +316,7 @@ class A
 end
 
 A.new.test #=> 'test'
-Object.const_get(:A).send(:new).send(:test) #=> 'test'
+Object.const_get('A').send('new').send('test') #=> 'test'
               </code>
             </pre>
           </section>
