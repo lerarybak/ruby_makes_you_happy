@@ -1,73 +1,67 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Ruby makes you happy</title>
+  <title>Ruby makes you happy</title>
 
-    <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/black.css">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/league.css">
 
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+  <link rel="stylesheet" href="css/custom.css">
 
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-  </head>
-  <body>
-    <div class="reveal">
-      <div class="slides">
-        <section id="mvc">
-          <h2>MVC</h2>
-          <a href="#/activemodel">next</a>
-        </section>
-        <section id="model" data-background-image='images/geek-girl.jpg'>
-          <h2>Model</h2>
-        </section>
-        <section id="view" data-background-image='images/sexy-girl.jpg'>
-          <h2>View</h2>
-        </section>
-        <section id="controller" data-background-image='images/busy-guy.jpg'>
-          <h2>Controller</h2>
-        </section>
-        <section id="activemodel">
-          ActiveModel
-        </section>
-        <section id="validations">
-          <pre>
-            <code data-trim data-noescape class="ruby">
-class Pet < ActiveRecord::Base
-  NAME_MAX_LENGTH = 50
-
-  validates :name, :birthday, :gender, presence: true
-  validates :name, length: { maximum: NAME_MAX_LENGTH }
-
-  validates :weight, numericality: { greater_than: 0 }
-  validates_date :birthday, on_or_before: :today
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section id="rails">
+        <h1>
+          RAILS
+        </h1>
+      </section>
+      <section id="mvc">
+        <div>
+          <img src='images/mvc.jpg'></img>
+        </div>
+        <a href="#/activemodel">next</a>
+      </section>
+      <section id="model" data-background-image='images/geek-girl.jpg'>
+        <h1>Model</h1>
+      </section>
+      <section id="view" data-background-image='images/sexy-girl.jpg'>
+        <h1>View</h1>
+      </section>
+      <section id="controller" data-background-image='images/busy-guy.jpg'>
+        <h1>Controller</h1>
+      </section>
+      <section id="actioncontroller">
+        <p>ActionController</p>
+      </section>
+      <section id="filters">
+        <h1>Filters</h1>
+        <pre>
+          <code data-trim data-noescape class="ruby">
+class UsersController < ApplicationController
+  before_action :authenticate_user!
 end
-            </code>
-          </pre>
-        </section>
-        <section id="actionview">
-          <p>ActionView</p>
-        </section>
-        <section id="actioncontroller">
-          <p>ActionController</p>
-          <ul>
-            <li>RESTful</li>
-            <li>Filters</li>
-          </ul>
-        </section>
-        <section id="response-formats">
-          <pre>
-            <code data-trim data-noescape class="ruby">
+          </code>
+        </pre>
+      </section>
+      <section id="response-formats">
+        <h1>Formats</h1>
+        <pre>
+          <code data-trim data-noescape class="ruby">
 class UsersController < ApplicationController
   def index
     @users = User.all
@@ -78,35 +72,230 @@ class UsersController < ApplicationController
     end
   end
 end
-            </code>
-          </pre>
-        </section>
-        <section id="activerecord">
-          <p>ActiveRecord</p>
-        </section>
-        <section id="conventions">Convention over configuration</section>
-        <section id="actionmailer">
-          <p>ActionMailer</p>
-        </section>
-        <section id="gems">Gems</section>
-        <section id="scaffolding">Scaffold generation</section>
-      </div>
+          </code>
+        </pre>
+      </section>
+      <section id="routing">
+        <h1>REST</h1>
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th>HTTP Verb</th>
+              <th>Path</th>
+              <th>Controller#Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GET</td>
+              <td>/photos</td>
+              <td>photos#index</td>
+            </tr>
+            <tr>
+              <td>GET</td>
+              <td>/photos/new</td>
+              <td>photos#new</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td>/photos</td>
+              <td>photos#create</td>
+            </tr>
+            <tr>
+              <td>GET</td>
+              <td>/photos/:id</td>
+              <td>photos#show</td>
+            </tr>
+            <tr>
+              <td>GET</td>
+              <td>/photos/:id/edit</td>
+              <td>photos#edit</td>
+            </tr>
+            <tr>
+              <td>PATCH/PUT</td>
+              <td>/photos/:id</td>
+              <td>photos#update</td>
+            </tr>
+            <tr>
+              <td>DELETE</td>
+              <td>/photos/:id</td>
+              <td>photos#destroy</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="activemodel">
+        <p>ActiveModel</p>
+      </section>
+      <section id="validations">
+        <pre>
+          <code class="ruby">
+class Pet
+  include ActiveModel::Validations
+
+  attr_accessor :name, :birthday, :weight
+
+  NAME_MAX_LENGTH = 50
+
+  validates :name, :birthday, presence: true
+  validates :name, length: { maximum: NAME_MAX_LENGTH }
+
+  validates :weight, numericality: { greater_than: 0 }
+  validates_date :birthday, on_or_before: :today
+end
+          </code>
+        </pre>
+      </section>
+      <section id="mother-of-god" data-background-image='images/mother-of-god.jpg' data-background-size='auto'></section>
+      <section id="validations-2">
+        <pre>
+          <code data-trim data-noescape class="ruby">
+pet = Pet.new
+pet.errors.any? # => false
+pet.save
+pet.errors.any? # => true
+          </code>
+        </pre>
+      </section>
+      <section id="naming">
+        <pre>
+          <code data-trim data-noescape class="ruby">
+class Person
+  extend ActiveModel::Naming
+end
+
+Person.model_name.name                # => "Person"
+Person.model_name.singular            # => "person"
+Person.model_name.plural              # => "people"
+Person.model_name.element             # => "person"
+Person.model_name.collection          # => "people"
+Person.model_name.human               # => "Person"
+Person.model_name.param_key           # => "person"
+Person.model_name.i18n_key            # => :person
+Person.model_name.route_key           # => "people"
+Person.model_name.singular_route_key  # => "person"
+          </code>
+        </pre>
+      </section>
+      <section id="dictionary">
+        <h1>Dictionary</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Model / Class</th>
+              <th>Table / Schema</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Article</code></td>
+              <td><code>articles</code></td>
+            </tr>
+            <tr>
+              <td><code>LineItem</code></td>
+              <td><code>line_items</code></td>
+            </tr>
+            <tr>
+              <td><code>Deer</code></td>
+              <td><code>deers</code></td>
+            </tr>
+            <tr>
+              <td><code>Mouse</code></td>
+              <td><code>mice</code></td>
+            </tr>
+            <tr>
+              <td><code>Person</code></td>
+              <td><code>people</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="activerecord"><p>ActiveRecord</p></section>
+      <section id="create">
+        <h1>Create</h1>
+        <pre>
+          <code data-trim data-noescape class="ruby">
+Post.create(title: 'Yay!', body: 'TLDR')
+Post.create!(title: 'Yay!', body: 'TLDR')
+          </code>
+        </pre>
+      </section>
+      <section id="read">
+        <h1>Read</h1>
+        <pre>
+          <code data-trim data-noescape class="ruby">
+# return a collection with all users
+users = User.all
+
+# return the first user
+user = User.first
+
+# return the first user named David
+david = User.find_by(name: 'David')
+
+# find all users named David and sort by created_at
+# in reverse chronological order
+users = User.where(name: 'David').order(created_at: :desc)
+          </code>
+        </pre>
+      </section>
+      <section id="update">
+        <h1>Update</h1>
+        <pre>
+          <code data-trim data-noescape class="ruby">
+# changes David's name to Dave
+user = User.find_by(name: 'David')
+user.update(name: 'Dave')
+
+# update all users
+User.update_all(max_login_attempts: 3)
+          </code>
+        </pre>
+      </section>
+      <section id="destroy">
+        <h1>Destroy</h1>
+        <pre>
+          <code data-trim data-noescape class="ruby">
+user = User.find_by(name: 'David')
+user.destroy
+          </code>
+        </pre>
+      </section>
+      <section id="alternative-orms">
+        <p>Alternative ORMs</p>
+        <p class="fragment" data-fragment-index="0"><a>Hanami::Model</a></p>
+        <p class="fragment" data-fragment-index="1"><a>Sequel</a></p>
+        <p class="fragment" data-fragment-index="2"><a>Sqeel</a></p>
+      </section>
+      <section id="actionview">
+        <p>ActionView</p>
+      </section>
+      <section id="gems">
+        <p>Gems</p>
+        <p class="fragment" data-fragment-index="0"><a>devise</a></p>
+        <p class="fragment" data-fragment-index="1"><a>pundit, cancancan</a></p>
+      </section>
+      <section id="scaffolding"><p>Scaffold generation</p></section>
+      <section id="github">
+
+      </section>
     </div>
+  </div>
 
-    <script src="lib/js/head.min.js"></script>
-    <script src="js/reveal.js"></script>
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
 
-    <script>
+  <script>
       // More info https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
         history: true,
 
         // More info https://github.com/hakimel/reveal.js#dependencies
         dependencies: [
-          { src: 'plugin/markdown/marked.js' },
-          { src: 'plugin/markdown/markdown.js' },
-          { src: 'plugin/notes/notes.js', async: true },
-          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        { src: 'plugin/markdown/marked.js' },
+        { src: 'plugin/markdown/markdown.js' },
+        { src: 'plugin/notes/notes.js', async: true },
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
         ]
       });
     </script>
