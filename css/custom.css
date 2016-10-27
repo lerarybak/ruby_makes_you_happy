@@ -1,14 +1,18 @@
 .reveal pre code {
-	font-size: 1.5em;
-	line-height: 1.2em;
-	max-height: 800px;
-	max-width: 1040px;
+  font-size: 1.5em;
+  line-height: 1.2em;
+  max-height: 800px;
+  max-width: 1040px;
 }
 
 .reveal pre {
-	width: 1040px;
+  width: 1040px;
 }
 
 .reveal p {
-	font-size: 3em;
+  font-size: 3em;
+}
+
+section#github {
+  text-align: left;
 }
